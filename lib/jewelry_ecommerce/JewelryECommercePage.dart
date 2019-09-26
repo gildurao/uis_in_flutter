@@ -197,38 +197,37 @@ class JewelryECommercePageState extends State<JewelryECommercePage>{
                     });
                 },
                 child: Container(
-                    color: Color(0xfffefcff),
-                    child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: <Widget>[
-                            _ringSheetTopIcons(),
-                            Image(image: ExactAssetImage(ringImageSrc),),
-                            Center(child: Icon(Icons.favorite),),
-                            Text("Very cool Ring by Pewdiepie", textAlign: TextAlign.left,),
-                            Text("100 Million Subscribers", textAlign: TextAlign.left,),
-                            Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    color: Color(0xff957363),
+                    child: Padding(
+                        padding: EdgeInsets.only(top: 25),
+                        child: DecoratedBox(
+                            position: DecorationPosition.background,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(20),
+                                    topRight: Radius.circular(20)
+                                ),
+                                color: Color(0xfffefcff)
+                            ),
+                            child: Column(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                 children: <Widget>[
+                                    _ringSheetTopIcons(),
+                                    Container(
+                                        child: _ringSheetImage(ringImageSrc),
+                                        margin: EdgeInsets.symmetric(vertical: 10),
+                                    ),
+                                    _sheetFavoriteIcon(),
+                                    _ringSheetDescription(),
+                                    _ringSheetQuantityAndPrice(),
+                                    Text("Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore", textAlign: TextAlign.center,),
                                     RaisedButton(
                                         onPressed: (){},
-                                        child: Row(
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                            children: <Widget>[
-                                                Text("-"),
-                                                Text("1"),
-                                                Text("+")
-                                            ],
-                                        ),
-                                    ),
-                                    Text("\$ 1000")
+                                        child: Text("ADD TO CART"),
+                                    )
                                 ],
                             ),
-                            Text("Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore", textAlign: TextAlign.center,),
-                            RaisedButton(
-                                onPressed: (){},
-                                child: Text("ADD TO CART"),
-                            )
-                        ],
+                        ),
                     ),
                 ),
             ),
@@ -237,14 +236,96 @@ class JewelryECommercePageState extends State<JewelryECommercePage>{
 
     Widget _ringSheetTopIcons(){
         return Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.0),
+            padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
             child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                     Icon(Icons.shopping_basket, color: Color(0xff967363),),
-                    Icon(Icons.cancel, color: Color(0xff967363),)
+                    Stack(
+                        children: [
+                            Container(
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8.0),
+                                    color: Color(0xff967363)
+                                ),
+                                width: 16.0,
+                                height: 16.0,
+                                margin: EdgeInsets.all(4.0),
+                            ),
+                            Icon(Icons.cancel, color: Color(0xffd4d1cf),)
+                        ],
+                    ),
                 ],
             ),
+        );
+    }
+
+    Widget _ringSheetImage(String ringImageSrc){
+        return Image(image: ExactAssetImage(ringImageSrc),);
+    }
+
+    Widget _sheetFavoriteIcon(){
+        return Center(
+            child: Icon(
+                Icons.favorite, 
+                color: Color(0xffd4d1cf),
+                size: 30,
+            ),
+        );
+    }
+
+    Widget _ringSheetDescription(){
+        return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+                Padding(
+                    padding: EdgeInsets.only(left: 16, bottom: 6),
+                    child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                            "Very cool Ring by Pewdiepie", 
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold
+                            ),
+                        ),
+                    ),
+                ),
+                Padding(
+                    padding: EdgeInsets.only(left: 16),
+                    child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                            "100 Million Subscribers", 
+                            textAlign: TextAlign.left, 
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, 
+                                color: Color(0xff9c9a97)
+                            ),
+                        ),
+                    ),
+                ),
+            ],
+        );
+    }
+
+    Widget _ringSheetQuantityAndPrice(){
+        return Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+                RaisedButton(
+                    onPressed: (){},
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                            Text("-"),
+                            Text("1"),
+                            Text("+")
+                        ],
+                    ),
+                ),
+                Text("\$ 1000")
+            ],
         );
     }
 
